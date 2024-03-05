@@ -1,20 +1,26 @@
-name: Publish Package to Packagist
+name: PHP Composer Packagist CI
+
 on:
   push:
     branches:
-        - master
+      - main
+
 jobs:
-  publish:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.0'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
       - name: Install dependencies
-        run: composer install
-      - name: Publish to Packagist
+        run: composer install --no-interaction --no-suggest
+
+      - name: Push to Packagist
         run: composer config http-basic.packagist.org ${{ secrets.PACKAGIST_USERNAME }} ${{ secrets.PACKAGIST_API_TOKEN }}
-      - run: composer require crafterlp/activeserverssdk --no-update
-      - run: composer update crafterlp/activeserverssdk --lock
+
+      - name: Update Packagist
+        run: composer update --no-interaction
