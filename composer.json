@@ -17,8 +17,7 @@
     "require": {
         "php": ">=8.0",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^7.8",
-        "illuminate/collections": "^10.46"
+        "guzzlehttp/guzzle": "^7.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5"
