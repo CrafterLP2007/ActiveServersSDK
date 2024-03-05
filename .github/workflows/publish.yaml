@@ -1,0 +1,26 @@
+name: PHP Composer Packagist CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-suggest
+
+      - name: Push to Packagist
+        run: composer config http-basic.packagist.org ${{ secrets.PACKAGIST_USERNAME }} ${{ secrets.PACKAGIST_API_TOKEN }}
+
+      - name: Update Composer
+        run: composer update --no-interaction
