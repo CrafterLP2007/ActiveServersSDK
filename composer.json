@@ -1,7 +1,6 @@
 {
     "name": "crafterlp/active-servers-sdk",
     "description": "A simple rest api for the new active-servers customer api",
-    "type": "project",
     "license": "MIT",
     "repositories": [
         {
